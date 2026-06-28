@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_e9d8529379dd22cae51a4b4a190461bd {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-textpath@1.2.3/leaflet.textpath.min.js"></script>
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_e9d8529379dd22cae51a4b4a190461bd" ></div>
+        
+    
+    <div style="
+        position: fixed; 
+        bottom: 30px; 
+        left: 30px; 
+        width: 320px; 
+        height: 160px; 
+        background-color: white; 
+        border: 2px solid #ccc; 
+        z-index: 9999; 
+        font-size: 13px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        border-radius: 8px;
+        padding: 12px;
+        box-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+        ">
+        <b style="font-size: 14px; color: #333;">Mapa de Distribucion Optimo - Fiabilidad Optima</b><br>
+        <span style="color: #666; font-size: 11px; font-style: italic;">Configuracion R-Opt Extrema (0.65, 0.10, 0.25)</span>
+        <div style="margin-top: 10px;">
+            <span style="display:inline-block; width:12px; height:12px; background-color:red; border-radius:50%; margin-right:8px;"></span> Depósito de Suministro (Origen)
+        </div>
+        <div style="margin-top: 5px;">
+            <span style="display:inline-block; width:12px; height:12px; background-color:#87CEFA; border:2px solid #1E90FF; border-radius:50%; margin-right:8px;"></span> Centro Regional (Demanda)
+        </div>
+        <div style="margin-top: 5px;">
+            <span style="display:inline-block; width:22px; height:4px; background-color:#4B0082; margin-right:8px; vertical-align:middle;"></span> Ruta Activa (Grosor &prop; Flujo)
+        </div>
+        <div style="margin-top: 8px; font-size: 10px; color: #777; border-top: 1px solid #eee; padding-top: 5px;">
+            Vehículos: P (Pequeño, 5t) | M (Mediano, 15t) | G (Grande, 25t)
+        </div>
+    </div>
+    
+</body>
+<script>
+    
+    
+            var map_e9d8529379dd22cae51a4b4a190461bd = L.map(
+                "map_e9d8529379dd22cae51a4b4a190461bd",
+                {
+                    center: [35.72, 139.6],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 9,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_d7580f1f8af232731fff003ddfb83409 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_d7580f1f8af232731fff003ddfb83409.addTo(map_e9d8529379dd22cae51a4b4a190461bd);
+        
+    
+            var marker_5f1a0c018f59c68e80b34c6d482b1796 = L.marker(
+                [35.5494, 139.7798],
+                {
+}
+            ).addTo(map_e9d8529379dd22cae51a4b4a190461bd);
+        
+    
+            var icon_51767d720f22d5001223260f3bce6089 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_5f1a0c018f59c68e80b34c6d482b1796.bindTooltip(
+                `<div>
+                     D1 (Haneda)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_5f1a0c018f59c68e80b34c6d482b1796.setIcon(icon_51767d720f22d5001223260f3bce6089);
+            
+    
+            var marker_39678fdde345e8dfc6b2599e11ea9039 = L.marker(
+                [35.7776, 140.3186],
+                {
+}
+            ).addTo(map_e9d8529379dd22cae51a4b4a190461bd);
+        
+    
+            var icon_0724fa781bcd7940f9ae6e06bb75e23c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_39678fdde345e8dfc6b2599e11ea9039.bindTooltip(
+                `<div>
+                     D2 (Narita)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_39678fdde345e8dfc6b2599e11ea9039.setIcon(icon_0724fa781bcd7940f9ae6e06bb75e23c);
+            
+    
+            var marker_6941360582eefc24ef5b75ab2385393c = L.marker(
+                [35.4503, 139.6644],
+                {
+}
+            ).addTo(map_e9d8529379dd22cae51a4b4a190461bd);
+        
+    
+            var icon_fa2a464ba6c1dea0b615383e0b05cf2d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_6941360582eefc24ef5b75ab2385393c.bindTooltip(
+                `<div>
+                     D3 (Yokohama)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6941360582eefc24ef5b75ab2385393c.setIcon(icon_fa2a464ba6c1dea0b615383e0b05cf2d);
+            
+    
+            var marker_2b70abaf0c718655ef0edb08cee209ad = L.marker(
+                [36.0835, 140.1983],
+                {
+}
+            ).addTo(map_e9d8529379dd22cae51a4b4a190461bd);
+        
+    
+            var icon_b3d0310e6c8acce7616eeba4697b5b88 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_2b70abaf0c718655ef0edb08cee209ad.bindTooltip(
+                `<div>
+                     D4 (Tsuchiura)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2b70abaf0c718655ef0edb08cee209ad.setIcon(icon_b3d0310e6c8acce7616eeba4697b5b88);
+            
+    
+            var circle_marker_507e9ca567525778a2bbc3625228567e = L.circleMarker(
+                [35.3389, 139.4875],
+                {"bubblingMouseEvents": true, "color": "#1E90FF", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#87CEFA", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_e9d8529379dd22cae51a4b4a190461bd);
+        
+    
+            circle_marker_507e9ca567525778a2bbc3625228567e.bindTooltip(
+                `<div>
+                     N1 (Fujisawa)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_924591cddec2f131203701c3856225ef = L.circleMarker(
+                [35.6947, 139.9826],
+                {"bubblingMouseEvents": true, "color": "#1E90FF", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#87CEFA", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_e9d8529379dd22cae51a4b4a190461bd);
+        
+    
+            circle_marker_924591cddec2f131203701c3856225ef.bindTooltip(
+                `<div>
+                     N2 (Funabashi)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_163489c7149f1722842592f97372afb7 = L.circleMarker(
+                [35.9751, 139.7544],
+                {"bubblingMouseEvents": true, "color": "#1E90FF", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#87CEFA", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_e9d8529379dd22cae51a4b4a190461bd);
+        
+    
+            circle_marker_163489c7149f1722842592f97372afb7.bindTooltip(
+                `<div>
+                     N3 (Kasukabe)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7c64e9a23a0cadf41f1a2c2c6467385e = L.circleMarker(
+                [35.9251, 139.4858],
+                {"bubblingMouseEvents": true, "color": "#1E90FF", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#87CEFA", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_e9d8529379dd22cae51a4b4a190461bd);
+        
+    
+            circle_marker_7c64e9a23a0cadf41f1a2c2c6467385e.bindTooltip(
+                `<div>
+                     N4 (Kawagoe)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9eb284f5bbd3ba005ec464e40cc858f7 = L.circleMarker(
+                [35.5308, 139.7029],
+                {"bubblingMouseEvents": true, "color": "#1E90FF", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#87CEFA", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_e9d8529379dd22cae51a4b4a190461bd);
+        
+    
+            circle_marker_9eb284f5bbd3ba005ec464e40cc858f7.bindTooltip(
+                `<div>
+                     N5 (Kawasaki)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_117e9d61e06f4276b569b82255f3069a = L.circleMarker(
+                [35.6581, 139.3244],
+                {"bubblingMouseEvents": true, "color": "#1E90FF", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#87CEFA", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_e9d8529379dd22cae51a4b4a190461bd);
+        
+    
+            circle_marker_117e9d61e06f4276b569b82255f3069a.bindTooltip(
+                `<div>
+                     N6 (Hachioji)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b83a0a828ed38392c2f2e15cab2c15ff = L.circleMarker(
+                [35.6638, 138.5683],
+                {"bubblingMouseEvents": true, "color": "#1E90FF", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#87CEFA", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_e9d8529379dd22cae51a4b4a190461bd);
+        
+    
+            circle_marker_b83a0a828ed38392c2f2e15cab2c15ff.bindTooltip(
+                `<div>
+                     N7 (Kofu)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_643d8df26ec46e08922d89812565f017 = L.circleMarker(
+                [35.8617, 139.6455],
+                {"bubblingMouseEvents": true, "color": "#1E90FF", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#87CEFA", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_e9d8529379dd22cae51a4b4a190461bd);
+        
+    
+            circle_marker_643d8df26ec46e08922d89812565f017.bindTooltip(
+                `<div>
+                     N8 (Saitama)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ef97d9421ead7cfd4128b7b461dd3acd = L.circleMarker(
+                [35.6073, 140.1063],
+                {"bubblingMouseEvents": true, "color": "#1E90FF", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#87CEFA", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_e9d8529379dd22cae51a4b4a190461bd);
+        
+    
+            circle_marker_ef97d9421ead7cfd4128b7b461dd3acd.bindTooltip(
+                `<div>
+                     N9 (Chiba)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5cc3e611786b727b80bcffe7cfce192d = L.circleMarker(
+                [35.6812, 139.7671],
+                {"bubblingMouseEvents": true, "color": "#1E90FF", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#87CEFA", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_e9d8529379dd22cae51a4b4a190461bd);
+        
+    
+            circle_marker_5cc3e611786b727b80bcffe7cfce192d.bindTooltip(
+                `<div>
+                     N10 (Tokio)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_bf9e72beef853cd80b094041435113f3 = L.polyline(
+                [[35.5308, 139.7029], [35.5494, 139.7798]],
+                {"bubblingMouseEvents": true, "color": "#4B0082", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#4B0082", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.75, "smoothFactor": 1.0, "stroke": true, "weight": 3.7}
+            ).addTo(map_e9d8529379dd22cae51a4b4a190461bd);
+        
+    
+            poly_line_bf9e72beef853cd80b094041435113f3.bindTooltip(
+                `<div>
+                     <b>Ruta:</b> D1 (Haneda) &rarr; N5 (Kawasaki)<br><b>Cantidad:</b> 255.0 t<br><b>Vehículos:</b> 17M<br><b>Distancia:</b> 4 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            poly_line_bf9e72beef853cd80b094041435113f3.setText(
+                "255 t",
+                {
+  "repeat": false,
+  "center": true,
+  "below": false,
+  "offset": 12,
+  "orientation": 0,
+  "attributes": {
+  "fill": "#4B0082",
+  "font-weight": "bold",
+  "font-size": "11",
+},
+}
+            );
+        
+    
+            var poly_line_fc5d1fc47e3927e208b9d44e7f4caed2 = L.polyline(
+                [[35.5494, 139.7798], [35.6073, 140.1063]],
+                {"bubblingMouseEvents": true, "color": "#4B0082", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#4B0082", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.75, "smoothFactor": 1.0, "stroke": true, "weight": 3.1}
+            ).addTo(map_e9d8529379dd22cae51a4b4a190461bd);
+        
+    
+            poly_line_fc5d1fc47e3927e208b9d44e7f4caed2.bindTooltip(
+                `<div>
+                     <b>Ruta:</b> D1 (Haneda) &rarr; N9 (Chiba)<br><b>Cantidad:</b> 165.0 t<br><b>Vehículos:</b> 11M<br><b>Distancia:</b> 50 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            poly_line_fc5d1fc47e3927e208b9d44e7f4caed2.setText(
+                "165 t",
+                {
+  "repeat": false,
+  "center": true,
+  "below": false,
+  "offset": 12,
+  "orientation": 0,
+  "attributes": {
+  "fill": "#4B0082",
+  "font-weight": "bold",
+  "font-size": "11",
+},
+}
+            );
+        
+    
+            var poly_line_698f3295af3fa0577abf283b27cbc200 = L.polyline(
+                [[35.6638, 138.5683], [35.5494, 139.7798]],
+                {"bubblingMouseEvents": true, "color": "#4B0082", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#4B0082", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.75, "smoothFactor": 1.0, "stroke": true, "weight": 2.2333333333333334}
+            ).addTo(map_e9d8529379dd22cae51a4b4a190461bd);
+        
+    
+            poly_line_698f3295af3fa0577abf283b27cbc200.bindTooltip(
+                `<div>
+                     <b>Ruta:</b> D1 (Haneda) &rarr; N7 (Kofu)<br><b>Cantidad:</b> 35.0 t<br><b>Vehículos:</b> 1M+1G<br><b>Distancia:</b> 140 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            poly_line_698f3295af3fa0577abf283b27cbc200.setText(
+                "35 t",
+                {
+  "repeat": false,
+  "center": true,
+  "below": false,
+  "offset": 12,
+  "orientation": 0,
+  "attributes": {
+  "fill": "#4B0082",
+  "font-weight": "bold",
+  "font-size": "11",
+},
+}
+            );
+        
+    
+            var poly_line_1723c9113c85a73904f0a43fbde70fe0 = L.polyline(
+                [[35.9751, 139.7544], [36.0835, 140.1983]],
+                {"bubblingMouseEvents": true, "color": "#4B0082", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#4B0082", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.75, "smoothFactor": 1.0, "stroke": true, "weight": 2.2666666666666666}
+            ).addTo(map_e9d8529379dd22cae51a4b4a190461bd);
+        
+    
+            poly_line_1723c9113c85a73904f0a43fbde70fe0.bindTooltip(
+                `<div>
+                     <b>Ruta:</b> D4 (Tsuchiura) &rarr; N3 (Kasukabe)<br><b>Cantidad:</b> 40.0 t<br><b>Vehículos:</b> 8P<br><b>Distancia:</b> 52 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            poly_line_1723c9113c85a73904f0a43fbde70fe0.setText(
+                "40 t",
+                {
+  "repeat": false,
+  "center": true,
+  "below": false,
+  "offset": 12,
+  "orientation": 0,
+  "attributes": {
+  "fill": "#4B0082",
+  "font-weight": "bold",
+  "font-size": "11",
+},
+}
+            );
+        
+    
+            var poly_line_20a1f54b060aeb2f8b14d25962d9dec9 = L.polyline(
+                [[35.8617, 139.6455], [36.0835, 140.1983]],
+                {"bubblingMouseEvents": true, "color": "#4B0082", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#4B0082", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.75, "smoothFactor": 1.0, "stroke": true, "weight": 3.5}
+            ).addTo(map_e9d8529379dd22cae51a4b4a190461bd);
+        
+    
+            poly_line_20a1f54b060aeb2f8b14d25962d9dec9.bindTooltip(
+                `<div>
+                     <b>Ruta:</b> D4 (Tsuchiura) &rarr; N8 (Saitama)<br><b>Cantidad:</b> 225.0 t<br><b>Vehículos:</b> 12P+11M<br><b>Distancia:</b> 60 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            poly_line_20a1f54b060aeb2f8b14d25962d9dec9.setText(
+                "225 t",
+                {
+  "repeat": false,
+  "center": true,
+  "below": false,
+  "offset": 12,
+  "orientation": 0,
+  "attributes": {
+  "fill": "#4B0082",
+  "font-weight": "bold",
+  "font-size": "11",
+},
+}
+            );
+        
+    
+            var poly_line_40a0a5d29027c2d3e5e888ca0985818b = L.polyline(
+                [[35.3389, 139.4875], [35.4503, 139.6644]],
+                {"bubblingMouseEvents": true, "color": "#4B0082", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#4B0082", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.75, "smoothFactor": 1.0, "stroke": true, "weight": 2.5}
+            ).addTo(map_e9d8529379dd22cae51a4b4a190461bd);
+        
+    
+            poly_line_40a0a5d29027c2d3e5e888ca0985818b.bindTooltip(
+                `<div>
+                     <b>Ruta:</b> D3 (Yokohama) &rarr; N1 (Fujisawa)<br><b>Cantidad:</b> 75.0 t<br><b>Vehículos:</b> 5M<br><b>Distancia:</b> 26 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            poly_line_40a0a5d29027c2d3e5e888ca0985818b.setText(
+                "75 t",
+                {
+  "repeat": false,
+  "center": true,
+  "below": false,
+  "offset": 12,
+  "orientation": 0,
+  "attributes": {
+  "fill": "#4B0082",
+  "font-weight": "bold",
+  "font-size": "11",
+},
+}
+            );
+        
+    
+            var poly_line_4051aaa0ebe0eced8ca0a7c3150a2f69 = L.polyline(
+                [[35.9251, 139.4858], [35.4503, 139.6644]],
+                {"bubblingMouseEvents": true, "color": "#4B0082", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#4B0082", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.75, "smoothFactor": 1.0, "stroke": true, "weight": 2.4}
+            ).addTo(map_e9d8529379dd22cae51a4b4a190461bd);
+        
+    
+            poly_line_4051aaa0ebe0eced8ca0a7c3150a2f69.bindTooltip(
+                `<div>
+                     <b>Ruta:</b> D3 (Yokohama) &rarr; N4 (Kawagoe)<br><b>Cantidad:</b> 60.0 t<br><b>Vehículos:</b> 4P+3M<br><b>Distancia:</b> 45 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            poly_line_4051aaa0ebe0eced8ca0a7c3150a2f69.setText(
+                "60 t",
+                {
+  "repeat": false,
+  "center": true,
+  "below": false,
+  "offset": 12,
+  "orientation": 0,
+  "attributes": {
+  "fill": "#4B0082",
+  "font-weight": "bold",
+  "font-size": "11",
+},
+}
+            );
+        
+    
+            var poly_line_478456690931a2976f030ca088044851 = L.polyline(
+                [[35.6947, 139.9826], [35.7776, 140.3186]],
+                {"bubblingMouseEvents": true, "color": "#4B0082", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#4B0082", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.75, "smoothFactor": 1.0, "stroke": true, "weight": 2.7}
+            ).addTo(map_e9d8529379dd22cae51a4b4a190461bd);
+        
+    
+            poly_line_478456690931a2976f030ca088044851.bindTooltip(
+                `<div>
+                     <b>Ruta:</b> D2 (Narita) &rarr; N2 (Funabashi)<br><b>Cantidad:</b> 105.0 t<br><b>Vehículos:</b> 7M<br><b>Distancia:</b> 45 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            poly_line_478456690931a2976f030ca088044851.setText(
+                "105 t",
+                {
+  "repeat": false,
+  "center": true,
+  "below": false,
+  "offset": 12,
+  "orientation": 0,
+  "attributes": {
+  "fill": "#4B0082",
+  "font-weight": "bold",
+  "font-size": "11",
+},
+}
+            );
+        
+    
+            var poly_line_793665d2c4890abf2df8c004e5bec7da = L.polyline(
+                [[35.6812, 139.7671], [35.5494, 139.7798]],
+                {"bubblingMouseEvents": true, "color": "#4B0082", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#4B0082", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.75, "smoothFactor": 1.0, "stroke": true, "weight": 6.3}
+            ).addTo(map_e9d8529379dd22cae51a4b4a190461bd);
+        
+    
+            poly_line_793665d2c4890abf2df8c004e5bec7da.bindTooltip(
+                `<div>
+                     <b>Ruta:</b> D1 (Haneda) &rarr; N10 (Tokio)<br><b>Cantidad:</b> 645.0 t<br><b>Vehículos:</b> 34P+19G<br><b>Distancia:</b> 20 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            poly_line_793665d2c4890abf2df8c004e5bec7da.setText(
+                "645 t",
+                {
+  "repeat": false,
+  "center": true,
+  "below": false,
+  "offset": 12,
+  "orientation": 0,
+  "attributes": {
+  "fill": "#4B0082",
+  "font-weight": "bold",
+  "font-size": "11",
+},
+}
+            );
+        
+    
+            var poly_line_94f02618f6f8d78a4da56d88308dd6ed = L.polyline(
+                [[35.6812, 139.7671], [36.0835, 140.1983]],
+                {"bubblingMouseEvents": true, "color": "#4B0082", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#4B0082", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.75, "smoothFactor": 1.0, "stroke": true, "weight": 7.9}
+            ).addTo(map_e9d8529379dd22cae51a4b4a190461bd);
+        
+    
+            poly_line_94f02618f6f8d78a4da56d88308dd6ed.bindTooltip(
+                `<div>
+                     <b>Ruta:</b> D4 (Tsuchiura) &rarr; N10 (Tokio)<br><b>Cantidad:</b> 885.0 t<br><b>Vehículos:</b> 26P+19M+19G<br><b>Distancia:</b> 70 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            poly_line_94f02618f6f8d78a4da56d88308dd6ed.setText(
+                "885 t",
+                {
+  "repeat": false,
+  "center": true,
+  "below": false,
+  "offset": 12,
+  "orientation": 0,
+  "attributes": {
+  "fill": "#4B0082",
+  "font-weight": "bold",
+  "font-size": "11",
+},
+}
+            );
+        
+    
+            var poly_line_960ed482614abc3779307e1df223d303 = L.polyline(
+                [[35.6581, 139.3244], [35.4503, 139.6644]],
+                {"bubblingMouseEvents": true, "color": "#4B0082", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#4B0082", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.75, "smoothFactor": 1.0, "stroke": true, "weight": 2.6333333333333333}
+            ).addTo(map_e9d8529379dd22cae51a4b4a190461bd);
+        
+    
+            poly_line_960ed482614abc3779307e1df223d303.bindTooltip(
+                `<div>
+                     <b>Ruta:</b> D3 (Yokohama) &rarr; N6 (Hachioji)<br><b>Cantidad:</b> 95.0 t<br><b>Vehículos:</b> 3M+2G<br><b>Distancia:</b> 50 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            poly_line_960ed482614abc3779307e1df223d303.setText(
+                "95 t",
+                {
+  "repeat": false,
+  "center": true,
+  "below": false,
+  "offset": 12,
+  "orientation": 0,
+  "attributes": {
+  "fill": "#4B0082",
+  "font-weight": "bold",
+  "font-size": "11",
+},
+}
+            );
+        
+</script>
+</html>

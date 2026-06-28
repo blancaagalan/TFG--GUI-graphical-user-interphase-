@@ -1,0 +1,266 @@
+[
+  {
+    "Q": 2585.0,
+    "coste": 497741.0,
+    "eq": 0.0,
+    "gr": 3.419479028850501,
+    "R": 0.03272948161388025,
+    "obj": 0.3779915053530809,
+    "small": 107,
+    "medium": 74,
+    "large": 39,
+    "veh_por_nodo": {
+      "1": {
+        "small": 5,
+        "medium": 0,
+        "large": 2
+      },
+      "2": {
+        "small": 0,
+        "medium": 7,
+        "large": 0
+      },
+      "3": {
+        "small": 0,
+        "medium": 0,
+        "large": 2
+      },
+      "4": {
+        "small": 0,
+        "medium": 4,
+        "large": 0
+      },
+      "5": {
+        "small": 0,
+        "medium": 17,
+        "large": 0
+      },
+      "6": {
+        "small": 0,
+        "medium": 7,
+        "large": 0
+      },
+      "7": {
+        "small": 0,
+        "medium": 3,
+        "large": 0
+      },
+      "8": {
+        "small": 42,
+        "medium": 1,
+        "large": 0
+      },
+      "9": {
+        "small": 12,
+        "medium": 4,
+        "large": 2
+      },
+      "10": {
+        "small": 48,
+        "medium": 31,
+        "large": 33
+      }
+    },
+    "w_cost": 0.6,
+    "w_eq": 0.2,
+    "w_gr": 0.2
+  },
+  {
+    "Q": 2585.0,
+    "coste": 528756.5,
+    "eq": 0.0,
+    "gr": 3.2704434496900134,
+    "R": 0.03798957687325385,
+    "obj": 0.36039698564329625,
+    "small": 89,
+    "medium": 72,
+    "large": 44,
+    "veh_por_nodo": {
+      "1": {
+        "small": 5,
+        "medium": 0,
+        "large": 2
+      },
+      "2": {
+        "small": 0,
+        "medium": 4,
+        "large": 2
+      },
+      "3": {
+        "small": 0,
+        "medium": 3,
+        "large": 0
+      },
+      "4": {
+        "small": 0,
+        "medium": 4,
+        "large": 0
+      },
+      "5": {
+        "small": 0,
+        "medium": 0,
+        "large": 11
+      },
+      "6": {
+        "small": 0,
+        "medium": 7,
+        "large": 0
+      },
+      "7": {
+        "small": 7,
+        "medium": 0,
+        "large": 0
+      },
+      "8": {
+        "small": 0,
+        "medium": 0,
+        "large": 9
+      },
+      "9": {
+        "small": 0,
+        "medium": 11,
+        "large": 0
+      },
+      "10": {
+        "small": 77,
+        "medium": 43,
+        "large": 20
+      }
+    },
+    "w_cost": 0.2,
+    "w_eq": 0.6,
+    "w_gr": 0.2
+  },
+  {
+    "Q": 2585.0,
+    "coste": 527088.5,
+    "eq": 0.0,
+    "gr": 3.2704434496900134,
+    "R": 0.03798957687325385,
+    "obj": 1.0498655502389718,
+    "small": 84,
+    "medium": 76,
+    "large": 42,
+    "veh_por_nodo": {
+      "1": {
+        "small": 0,
+        "medium": 5,
+        "large": 0
+      },
+      "2": {
+        "small": 0,
+        "medium": 7,
+        "large": 0
+      },
+      "3": {
+        "small": 0,
+        "medium": 0,
+        "large": 2
+      },
+      "4": {
+        "small": 0,
+        "medium": 1,
+        "large": 2
+      },
+      "5": {
+        "small": 0,
+        "medium": 17,
+        "large": 0
+      },
+      "6": {
+        "small": 0,
+        "medium": 7,
+        "large": 0
+      },
+      "7": {
+        "small": 7,
+        "medium": 0,
+        "large": 0
+      },
+      "8": {
+        "small": 0,
+        "medium": 15,
+        "large": 0
+      },
+      "9": {
+        "small": 0,
+        "medium": 11,
+        "large": 0
+      },
+      "10": {
+        "small": 77,
+        "medium": 13,
+        "large": 38
+      }
+    },
+    "w_cost": 0.2,
+    "w_eq": 0.2,
+    "w_gr": 0.6
+  },
+  {
+    "Q": 2585.0,
+    "coste": 528756.5,
+    "eq": 0.0,
+    "gr": 3.2704434496900134,
+    "R": 0.03798957687325385,
+    "obj": 0.600661642738827,
+    "small": 89,
+    "medium": 72,
+    "large": 44,
+    "veh_por_nodo": {
+      "1": {
+        "small": 5,
+        "medium": 0,
+        "large": 2
+      },
+      "2": {
+        "small": 0,
+        "medium": 4,
+        "large": 2
+      },
+      "3": {
+        "small": 0,
+        "medium": 3,
+        "large": 0
+      },
+      "4": {
+        "small": 0,
+        "medium": 4,
+        "large": 0
+      },
+      "5": {
+        "small": 0,
+        "medium": 0,
+        "large": 11
+      },
+      "6": {
+        "small": 0,
+        "medium": 7,
+        "large": 0
+      },
+      "7": {
+        "small": 7,
+        "medium": 0,
+        "large": 0
+      },
+      "8": {
+        "small": 0,
+        "medium": 0,
+        "large": 9
+      },
+      "9": {
+        "small": 0,
+        "medium": 11,
+        "large": 0
+      },
+      "10": {
+        "small": 77,
+        "medium": 43,
+        "large": 20
+      }
+    },
+    "w_cost": 0.3333333333333333,
+    "w_eq": 0.3333333333333333,
+    "w_gr": 0.3333333333333333
+  }
+]

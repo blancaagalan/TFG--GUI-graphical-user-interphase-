@@ -1,0 +1,22 @@
+Cantidad distribuida: 2585.0 t
+Coste total: 525034.50 USD
+Equidad (max déficit): 0.0000
+Fiabilidad global R: 0.0380  (-ln R = 3.2704)
+Envíos:
+  D1 -> N5 (medium): 255.0 t
+  D2 -> N2 (medium): 105.0 t
+  D1 -> N9 (small): 165.0 t
+  D4 -> N8 (large): 225.0 t
+  D1 -> N10 (large): 485.0 t
+  D3 -> N1 (medium): 75.0 t
+  D1 -> N10 (medium): 90.0 t
+  D1 -> N10 (medium): 105.0 t
+  D4 -> N10 (medium): 450.0 t
+  D3 -> N4 (medium): 60.0 t
+  D4 -> N10 (large): 275.0 t
+  D4 -> N10 (small): 125.0 t
+  D4 -> N7 (small): 35.0 t
+  D4 -> N3 (small): 40.0 t
+  D3 -> N6 (medium): 30.0 t
+  D3 -> N6 (large): 50.0 t
+  D3 -> N6 (medium): 15.0 t

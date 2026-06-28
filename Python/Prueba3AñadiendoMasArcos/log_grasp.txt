@@ -1,0 +1,61 @@
+=== FASE 1: Maximizar cantidad distribuida ===
+  Iter 1: nueva mejor cantidad = 2329.9 t
+  Iter 2: nueva mejor cantidad = 2349.9 t
+  Iter 3: nueva mejor cantidad = 2584.9 t
+  Iter 28: nueva mejor cantidad = 2584.9 t
+Cantidad máxima alcanzable: 2584.9 t (demanda total: 2585 t)
+
+Calculando meta de coste (cost_min)...
+Meta de coste: 499740.62 USD
+
+=== FASE 2: Optimizar coste, equidad y fiabilidad ===
+  Iter 3: mejor obj agregado = 0.433766
+  Iter 40: mejor obj agregado = 0.432422
+
+======================================
+        RESULTADOS FINALES
+======================================
+Cantidad distribuida: 2584.9 t
+Coste total: 499341.02 USD
+Equidad (max déficit): 0.0002
+Fiabilidad global R: 0.0316  (-ln R = 3.4554)
+Objetivo agregado: 0.432422
+Envíos realizados:
+  D1 -> N2 (medium): 105.0 t
+  D3 -> N1 (large): 45.0 t
+  D2 -> N9 (medium): 120.0 t
+  D1 -> N5 (medium): 255.0 t
+  D2 -> N9 (large): 45.0 t
+  D4 -> N8 (large): 225.0 t
+  D1 -> N10 (small): 110.0 t
+  D1 -> N10 (medium): 90.0 t
+  D3 -> N1 (medium): 30.0 t
+  D1 -> N10 (large): 495.0 t
+  D1 -> N7 (small): 35.0 t
+  D3 -> N4 (medium): 60.0 t
+  D4 -> N10 (large): 225.0 t
+  D4 -> N10 (medium): 450.0 t
+  D4 -> N10 (small): 160.0 t
+  D4 -> N3 (small): 40.0 t
+  D3 -> N6 (small): 35.0 t
+  D3 -> N6 (medium): 60.0 t
+
+Desglose por nodo de destino:
+  N1: recibe 75.0 t con 2 medium, 2 large
+  N2: recibe 105.0 t con 7 medium
+  N3: recibe 40.0 t con 8 small
+  N4: recibe 60.0 t con 4 medium
+  N5: recibe 255.0 t con 17 medium
+  N6: recibe 95.0 t con 7 small, 4 medium
+  N7: recibe 35.0 t con 7 small
+  N8: recibe 225.0 t con 9 large
+  N9: recibe 165.0 t con 8 medium, 2 large
+  N10: recibe 1530.0 t con 54 small, 36 medium, 29 large
+
+Total de vehículos utilizados:
+  small: 76
+  medium: 78
+  large: 42
+
+Valor objetivo agregado: 0.432422
+DEBUGGING -> gr_final vale: 3.4554138062388224 | Tipo: <class 'float'>
