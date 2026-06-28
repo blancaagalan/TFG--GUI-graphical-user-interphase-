@@ -243,9 +243,9 @@ def main_gui():
     
     # Sliders
     st.sidebar.subheader("⚖️ Pesos de la Segunda Fase")
-    w_cost = st.sidebar.slider("Peso Coste (w_Cost)", 0.0, 1.0, st.session_state.w_cost, 0.01, key="slider_w_cost")
-    w_eq = st.sidebar.slider("Peso Equidad (w_Eq)", 0.0, 1.0, st.session_state.w_eq, 0.01, key="slider_w_eq")
-    w_gr = st.sidebar.slider("Peso Fiabilidad (w_GR)", 0.0, 1.0, st.session_state.w_gr, 0.01, key="slider_w_gr")
+    w_cost = st.sidebar.slider("Peso Coste (w_Cost)", 0.0, 1.0, step=0.01, key="w_cost")
+    w_eq = st.sidebar.slider("Peso Equidad (w_Eq)", 0.0, 1.0, step=0.01, key="w_eq")
+    w_gr = st.sidebar.slider("Peso Fiabilidad (w_GR)", 0.0, 1.0, step=0.01, key="w_gr")
     
     # Real-time normalization
     w_sum = w_cost + w_eq + w_gr
@@ -263,8 +263,8 @@ def main_gui():
     
     st.sidebar.markdown("---")
     st.sidebar.subheader("🔧 Configuración GRASP")
-    alpha = st.sidebar.slider("Parámetro de codicia (alpha)", 0.0, 1.0, st.session_state.alpha, 0.05, key="slider_alpha")
-    max_iter = st.sidebar.slider("Iteraciones Máximas", 50, 1000, st.session_state.max_iter, 50, key="slider_max_iter")
+    alpha = st.sidebar.slider("Parámetro de codicia (alpha)", 0.0, 1.0, step=0.05, key="alpha")
+    max_iter = st.sidebar.slider("Iteraciones Máximas", 50, 1000, step=50, key="max_iter")
     
     # Execution Button
     run_grasp = st.sidebar.button("🚀 EJECUTAR OPTIMIZACIÓN GRASP", use_container_width=True)
