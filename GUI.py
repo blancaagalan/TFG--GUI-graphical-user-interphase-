@@ -223,17 +223,17 @@ def main_gui():
     # Presets Section
     st.sidebar.subheader("📌 Escenarios Preconfigurados")
     col_p1, col_p2, col_p3 = st.sidebar.columns(3)
-    if col_p1.button("C-Opt 1"):
+    if col_p1.button("C- 1"):
         st.session_state.w_cost = 0.55
         st.session_state.w_eq = 0.40
         st.session_state.w_gr = 0.05
         st.session_state.alpha = 0.3
-    if col_p2.button("R-Opt Ext"):
+    if col_p2.button("R- 2"):
         st.session_state.w_cost = 0.65
         st.session_state.w_eq = 0.10
         st.session_state.w_gr = 0.25
         st.session_state.alpha = 0.3
-    if col_p3.button("C-Opt 2"):
+    if col_p3.button("C- 2"):
         st.session_state.w_cost = 0.30
         st.session_state.w_eq = 0.05
         st.session_state.w_gr = 0.65
