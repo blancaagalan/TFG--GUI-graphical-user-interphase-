@@ -314,7 +314,7 @@ def main_gui():
     col2.metric("💰 Coste Total", f"${coste_total:.2f} USD")
     
     # Equity (Max deficit)
-    col3.metric("⚖️ Inequidad (Max Déficit)", f"{equidad_val:.4f}", "Perfecta Equidad" if equidad_val < 1e-4 else None)
+    col3.metric("⚖️ Inequidad (Max Déficit)", f"{equidad_val:.2f}", "Perfecta Equidad" if equidad_val < 1e-4 else None)
     
     # Reliability
     neg_ln_r = gr_val
